@@ -1,5 +1,4 @@
 console.log($); 
-
 // dummy API data =====
 const apiData = [
 	{
@@ -59,3 +58,88 @@ const apiData = [
 		],
 	},
 ]
+//Should be able to click a button and get a random recipe
+
+
+//cached elements ======
+const $getRecipeBtn = $('#getRecipeBtn')
+// console.log($getRecipeBtn)
+const $mainContent = $('main')
+
+//create a function to get the API data and randomly select it
+//get API data  ==== this is where we could get the api data using AJAX (using dummy api data in this case)
+const getRecipe = () => {
+// console.log('get recipe is working') ==> can use to check if everything is linked up 
+console.log(apiData)
+//use randomIndex to randomly select one from apiData 
+const randomIndex = Math.floor(Math.random()* apiData.length)
+const recipe = apiData[randomIndex]
+// console.log(recipe)
+displayRecipe(recipe)
+//running a fuction inside another function. 
+}
+
+//creating a function just to display the recipe on the website
+const displayRecipe = (recipe) => {
+	// console.log(recipe)
+
+	//using .empty() to remove all child element (nodes) from the mainContent
+	$mainContent.empty()
+
+	//display recipe image
+	const $img = $('<img>')
+	$img.attr('src', recipe.image)
+	$img. attr('alt', recipe.title)
+	$mainContent.append($img)
+
+
+	// create div to hold recipe info 
+	const $recipeInfo = $('<div>')
+	$recipeInfo.addClass('recipeInfo')
+	$mainContent.append($recipeInfo)
+
+
+	//displau recipe title
+	const $recipeTitle = $('<h2>')
+	$recipeTitle.text(recipe.title)
+	$recipeInfo.append($recipeTitle)
+		//appended into the recipe Info div
+
+
+	//display heading for ingredients list
+	const $ingredientsHeading = $('<h3>')
+	$ingredientsHeading.text('Ingredients')
+	$recipeInfo.append($ingredientsHeading)
+
+
+	//display list of ingredients 
+	const $ingredientsList = $('<ul>')
+	$recipeInfo.append($ingredientsList)
+	
+	
+	//disply each ingredient as a list item 
+	// Array.forEach((element) =>{})
+	recipe.ingredients.forEach((ingredient) => {
+	console.log(ingredient)
+
+	const $li = $('<li>')
+	$li.text(ingredient)
+	$ingredientsList.append($li)
+	//appended on the ul constant
+	})
+
+	//display heading for instructions
+	const $instructionsHeading = $('<h3>')
+	$instructionsHeading.text('Instructions')
+	$recipeInfo.append($instructionsHeading)
+
+	//display list of instructions
+
+
+}
+
+
+
+//event listener =======
+$getRecipeBtn.on('click', getRecipe)
+	//function getRecipe was created to generate the recipe (in place of function word usually there)
