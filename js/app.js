@@ -1,3 +1,5 @@
+console.log($); 
+
 // dummy API data =====
 const apiData = [
 	{
